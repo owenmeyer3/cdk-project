@@ -12,6 +12,7 @@ RUN mkdir -p function-name
 COPY code/classify_doc/ ./classify_doc/
 COPY code/process-doc-1/ ./process-doc-1/
 COPY code/process-doc-2/ ./process-doc-2/
+COPY code/process-doc-3/ ./process-doc-3/
 COPY infrastructure/cdk-project-image/requirements.txt ./requirements.txt
 
 RUN apt-get install -y --no-install-recommends ca-certificates
