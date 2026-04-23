@@ -1,28 +1,20 @@
-#!/usr/bin/env python3
-import os
-
 import aws_cdk as cdk
+from stacks.cdk_project_stack import CdkProjectStack
+import json, os
 
-from cdk_project.cdk_project_stack import CdkProjectStack
-
+# call like: cdk synth/deploy -c env={env} --profile {local profile} --region {profile region}
 
 app = cdk.App()
-CdkProjectStack(app, "CdkProjectStack",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
+env_name=app.node.try_get_context("env")
 
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
+# Get configurations for project and cli specified env 
+project_config = env_config = None
+with open('config.json') as f:
+    config_file=json.load(f)
+    project_config=config_file['project']
+    env_config=config_file[env_name]
 
-    #env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-
-    # Uncomment the next line if you know exactly what Account and Region you
-    # want to deploy the stack to. */
-
-    #env=cdk.Environment(account='123456789012', region='us-east-1'),
-
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+env=cdk.Environment(account=env_config['ACCOUNT'], region=env_config['REGION'])
+CdkProjectStack(app, f"CdkProjectStack-{env_name}",env=env, project_config=project_config, env_config=env_config)
 
 app.synth()

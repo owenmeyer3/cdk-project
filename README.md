@@ -1,58 +1,16 @@
 
-# Welcome to your CDK Python project!
+# AWS CDK Project Use Case
 
-This is a blank project for CDK development with Python.
+This project currently serves as a use case for ML document processing operations
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+The project creates a pipeline in the form of an AWS State Machine to do the following:
+- Set up an EventBridge trigger to launch the StateMachine when json file metadata lands in a specified S3 directory
+- Execute a Lambda function which uses the metadata to classify the document based on the source and document characteristics
+- Map the documents to one or more ECS tasks based on its classification, to process the document as needed
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
-
-To manually create a virtualenv on MacOS and Linux:
-
-```
-$ python3 -m venv .venv
-```
-
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
-
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `requirements.txt` file and rerun the `python -m pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+A few notes on this project
+- The project is built for an AWS account with an existing Virtual Private cloud (VPC) configuration, ECS cluster, and IAM roles made to execute many of the AWS Services
+- The project includes many reusable custom classes which would be useful in other projects
+- The code in the ECS tasks and Lambda function is incomplete, as this is currently an example of an AWS Cloudformation Stack with no specific logical purpose in classifying documents
+- There is a shared Docker image which is set up to be able to run Lambda functions and ECS tasks. In practice, configuring multiple images could prove useful for a project with other configurations
+- Testing files have been included to aid on development. If a user is developing locally, there is a file useful in executing project logic within the local docker container before it is pushed to ECR. There is also a file useful to directly launch ECS tasks on the existing ECS cluster after deployment to a development environment. This tends to be useful when the task is meant to be triggered by an event or as part of a state machine, so that developers can instead test each task separately

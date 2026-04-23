@@ -1,0 +1,45 @@
+{
+	"project": {"NAME":"doc-processor"},
+	"dev": {
+		"ENV":"",
+		"ACCOUNT":"",
+		"REGION":"",
+		"VPC_CONFIG":{
+			"ID":"",
+			"SUBNETS":[
+				{"ID":"", "AZ":"", "ROUTE_TABLE":""},
+				{"ID":"", "AZ":"", "ROUTE_TABLE":""}
+			],
+			"SECURITY_GROUP":""
+		},
+		"EXECUTION_ROLE_ARN":"",
+		"CLUSTER_NAME":"",
+		"FNS":{
+			"CLASSIFY_DOC":{},
+			"PROCESS_DOC_1":{},
+			"PROCESS_DOC_2":{},
+			"PROCESS_DOC_3":{}
+		}
+	},
+	"prd": {
+		"ENV":"",
+		"ACCOUNT":"",
+		"REGION":"",
+		"VPC_CONFIG":{
+			"ID":"",
+			"SUBNETS":[
+				{"ID":"", "AZ":"", "ROUTE_TABLE":""},
+				{"ID":"", "AZ":"", "ROUTE_TABLE":""}
+			],
+			"SECURITY_GROUP":""
+		},
+		"EXECUTION_ROLE_ARN":"",
+		"CLUSTER_NAME":"",
+		"FNS":{
+			"CLASSIFY_DOC":{},
+			"PROCESS_DOC_1":{},
+			"PROCESS_DOC_2":{},
+			"PROCESS_DOC_3":{}
+		}
+	}
+}

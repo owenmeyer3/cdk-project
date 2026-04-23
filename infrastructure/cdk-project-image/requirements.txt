@@ -1,0 +1,10 @@
+boto3==1.37.1
+numpy==1.26.4
+pandas==2.2.3
+botocore==1.37.1
+s3fs==2024.10.0
+pyarrow==18.1.0
+pydantic==2.21.1
+awswrangler==3.11.0
+pymupdf==1.26.6
+en-core-web-sm @ https://github.com/...
